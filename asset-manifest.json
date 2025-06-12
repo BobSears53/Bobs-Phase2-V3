@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Bobs-Phase2-V3/static/css/main.1c9b3e01.css",
+    "main.js": "/Bobs-Phase2-V3/static/js/main.c7550a3d.js",
+    "index.html": "/Bobs-Phase2-V3/index.html",
+    "main.1c9b3e01.css.map": "/Bobs-Phase2-V3/static/css/main.1c9b3e01.css.map",
+    "main.c7550a3d.js.map": "/Bobs-Phase2-V3/static/js/main.c7550a3d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c9b3e01.css",
+    "static/js/main.c7550a3d.js"
+  ]
+}
