@@ -57,6 +57,13 @@ export default function App() {
   const onSaveClick = () => {
     const mode = formObject.id >= 0 ? 'Update' : 'Add';
     log('in onSaveClick(), mode:', mode);
+
+      // Validation: check for empty fields
+  if (!formObject.name.trim() || !formObject.email.trim() || !formObject.password.trim()) {
+    alert('Please fill in all fields: Name, Email, and Password.');
+    return; // stop save if validation fails
+  }
+  
     const postOpCallback = () => {
       setFormObject(blankCustomer);
       setDataChange((prev) => prev + 1); // trigger reload
