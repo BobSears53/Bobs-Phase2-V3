@@ -67,7 +67,7 @@ export default function App() {
     const postOpCallback = () => {
       setFormObject(blankCustomer);
       setDataChange((prev) => prev + 1); // trigger reload
-    };   
+    };    
 
     if (mode === 'Add') {
       post(formObject, postOpCallback);
