@@ -63,11 +63,11 @@ export default function App() {
     alert('Please fill in all fields: Name, Email, and Password.');
     return; // stop save if validation fails
   }
-  
+
     const postOpCallback = () => {
       setFormObject(blankCustomer);
       setDataChange((prev) => prev + 1); // trigger reload
-    };
+    };   
 
     if (mode === 'Add') {
       post(formObject, postOpCallback);
