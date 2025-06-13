@@ -21,7 +21,7 @@ export default function CustomerList({ customers, selectedCustomerId, onSelectCu
             >
               <td>{item.name}</td>
               <td>{item.email}</td>
-              <td>{item.password}</td>
+              <td>{item.password ? '*'.repeat(item.password.length) : ''}</td>
             </tr>
           ))}
         </tbody>
