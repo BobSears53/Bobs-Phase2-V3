@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getAll, post, put, deleteById } from './restdb.js';
+import { getAll, post, put, deleteById } from './memdb.js';
 import CustomerList from './Components/CustomerList.js';
 import CustomerAddUpdateForm from './Components/CustomerAddUpdateForm.js';
 import './App.css';
 
-function log(message, ...optionalParams) {
-  console.log(message, ...optionalParams);
+function log(message) {
+  console.log(message);
 }
 
 export default function App() {
@@ -13,13 +13,14 @@ export default function App() {
   const [customers, setCustomers] = useState([]);
   const [formObject, setFormObject] = useState(blankCustomer);
 
-  // state to track when data changes
-  const [dataChange, setDataChange] = useState(0);
-
   useEffect(() => {
+    getCustomers();
+  }, []);
+
+  const getCustomers = () => {
     log('in getCustomers()');
-    getAll(setCustomers);
-  }, [dataChange]); // runs on dataChange
+    setCustomers(getAll());
+  };
 
   const handleListClick = (item) => {
     if (formObject.id === item.id) {
@@ -42,31 +43,25 @@ export default function App() {
   };
 
   const onDeleteClick = () => {
-    const postOpCallback = () => {
-      setFormObject(blankCustomer);
-      setDataChange((prev) => prev + 1); // trigger reload
-    };
     if (formObject.id >= 0) {
-      deleteById(formObject.id, postOpCallback);
-    } else {
-      setFormObject(blankCustomer);
+      deleteById(formObject.id);
+      getCustomers();
     }
+    setFormObject(blankCustomer);
     log('in onDeleteClick()');
   };
 
   const onSaveClick = () => {
     const mode = formObject.id >= 0 ? 'Update' : 'Add';
     log('in onSaveClick(), mode:', mode);
-    const postOpCallback = () => {
-      setFormObject(blankCustomer);
-      setDataChange((prev) => prev + 1); // trigger reload
-    };
-
     if (mode === 'Add') {
-      post(formObject, postOpCallback);
-    } else if (mode === 'Update') {
-      put(formObject.id, formObject, postOpCallback);
+      post(formObject);
     }
+    if (mode === 'Update') {
+      put(formObject.id, formObject);
+    }
+    getCustomers();
+    setFormObject(blankCustomer);
   };
 
   const mode = formObject.id >= 0 ? 'Update' : 'Add';
